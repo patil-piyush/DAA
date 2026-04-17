@@ -9,7 +9,7 @@ public class SortingComparison {
         System.out.println();
     }
 
-    // Selection Sort
+    // Selection Sortjava Sorting
     static void selectionSort(int arr[]) {
         int n = arr.length;
 
