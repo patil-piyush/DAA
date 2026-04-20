@@ -1,7 +1,6 @@
 from queue import Queue
 import heapq
 
-
 def sort_items(items):
     n = len(items)
     for i in range(n):
@@ -10,8 +9,6 @@ def sort_items(items):
                 items[i], items[j] = items[j], items[i]
     return items
 
-
-# Bound function
 def bound(level, profit, weight, W, items):
     if weight > W:
         return 0
@@ -30,11 +27,9 @@ def bound(level, profit, weight, W, items):
 
     return total_profit
 
-
-# FIFO 
 def fifo_knapsack(items, W):
     q = Queue()
-    q.put((-1, 0, 0))   
+    q.put((-1, 0, 0))
     max_profit = 0
 
     while not q.empty():
@@ -57,8 +52,6 @@ def fifo_knapsack(items, W):
 
     return max_profit
 
-
-# LC 
 def lc_knapsack(items, W):
     pq = []
     heapq.heappush(pq, (-bound(-1,0,0,W,items), -1, 0, 0))
@@ -86,14 +79,28 @@ def lc_knapsack(items, W):
 
     return max_profit
 
-
 tests = [
     ([(60,10),(100,20),(120,30)], 50),
-    ([(10,5),(40,4),(30,6),(50,3)], 10)
+    ([(10,5),(40,4),(30,6),(50,3)], 10),
+    ([(20,2),(30,5),(35,7),(12,3),(3,1)], 10),
+    ([(15,2),(25,3),(50,5),(60,8)], 8),
+    ([], 50),
+    ([(10,5),(20,10)], 0),
+    ([(100,60),(200,80),(300,100)], 50),
+    ([(100,20)], 25),
+    ([(100,30)], 20),
+    ([(10,2),(20,4),(30,6)], 8),
+    ([(500,30),(400,20),(200,10),(300,25)], 50),
 ]
 
 for i in range(len(tests)):
     items, W = tests[i]
+
+    if len(items) == 0:
+        print("\nTest Case", i+1)
+        print("FIFO:", 0)
+        print("LC:", 0)
+        continue
 
     items = sort_items(items)
 
